@@ -1,0 +1,12 @@
+{
+  "name"          : "hexdump",
+  "description"   : "A javascript utility for pretty hexdump output.",
+  "homepage"      : "https://github.com/mephux/hexdump.js",
+  "keywords"      : ["hex", "dump", "hexdump"],
+  "author"        : "Dustin Willis Webber <dustin.webber@gmail.com>",
+  "contributors"  : [],
+  "dependencies"  : [],
+  "repository"    : {"type": "git", "url": "git://github.com/mephux/hexdump.js.git"},
+  "main"          : "hexdump.js",
+  "version"       : "0.1.0"
+}

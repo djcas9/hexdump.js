@@ -49,10 +49,11 @@
         var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
         var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
         var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-
-        var data = randomString(1000);
+        var random5 = Math.floor(Math.random()*1000);
+        
+        var data = randomString(random5);
         update_hex('hexdump', data, random, random2);
-      }, 1000);
+      }, 100);
 
     </script>
 
