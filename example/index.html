@@ -4,57 +4,130 @@
   <head>
     <meta charset="UTF-8">
     <title>Hexdump.js Example</title>
+    
+    <link rel="stylesheet" type="text/css" href="hexdump.css" media="all">
+    
     <script type="text/javascript" src="../src/hexdump.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="jquery-ui.js"></script>
+    
   </head>
 
   <body>
+    
+    <form action="#">
+      
+      <div id='form-row'>
+        <div id='box'>
+          <select name='width' id="form-width">
+            <option>10</option>
+            <option selected>20</option>
+            <option>25</option>
+            <option>30</option>
+            <option>35</option>
+            <option>40</option>
+            <option>45</option>
+          </select>
+          Width
+        </div>
+        
+        <div id="box">
+          <select name='width' id="form-spacing">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </select>
+          Spacing
+        </div>
+        
+        <div id='box'>
+          <input type="checkbox" name="linenumbers" id="linenumbers" checked='true' />
+          Line Numbers
+        </div>
+        
+        <div id='box'>
+          <input type="checkbox" name="html" id="html" checked='true' />
+          HTML / Selecting Effects
+        </div>
+        
+      </div>
+    </form>
+    
     <pre id="hexdump"></pre>
 
-    <br />
-
-    <pre id="hexdump2"></pre>
-
-
-    <script type="text/javascript">
-      function randomString(length) {
-        var chars = 'A'.split('');
-      
-        if (! length) {
-          length = Math.floor(Math.random() * chars.length);
-        };
-      
-        var str = '';
-        for (var i = 0; i < length; i++) {
-          str += chars[Math.floor(Math.random() * chars.length)];
-        };
-        return str;
-      };
-      
-      function update_hex(container, data, spacing, width) {
+    <script type="text/javascript">    
+      function hexdump (width, spacing, linenumbers, html) {
+        var data = 'Priority.Count:.5..Connection.Count:.54.IP.Count:.17.Scanner.IP.Range:.66.249.68.181:198.199.195.228.Port/Proto.Count:.16.Port/Proto.Range:.80:6667.Priority.Count:.5..Connection.Count:.54.IP.Count:.17.Scanner.IP.Range:.66.249.68.181:198.199.195.228.Port/Proto.Count:.16.Port/Proto.Range:.80:6667.';
+        
         new Hexdump(data, {
-          container: container
+          container: 'hexdump'
           , width: width
           , spacing: spacing
-          , hexNull: '00'
-          , left: '|'
-          , right: '|'
-          , stringNull: '.'
+          , html: html
+          , lineNumber: linenumbers
+          , style: {
+              lineNumberLeft: ''
+            , lineNumberRight: ':'
+            , stringLeft: '|'
+            , stringRight: '|'
+            , hexLeft: ''
+            , hexRight: ''
+            , hexNull: '..'
+            , stringNull: '.'
+          }
         });
       };
       
-      // Ignore This
-      setInterval(function() {
-        var min = 1; var max = 10; var min2 = 30; var max2 = 40;
+      $(function() {
       
-        var random = Math.floor(Math.random() * (max - min + 1)) + min;
-        var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
-        var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-        var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-        var random5 = Math.floor(Math.random()*1000);
+        function hasHTML() {
+          return $('form input#html').is(':checked');
+        }
         
-        var data = randomString(random5);
-        update_hex('hexdump', data, random, random2);
-      }, 100);
+        function hasLineNumbers() {
+          return $('form input#linenumbers').is(':checked');
+        }
+        
+        hexdump(20, 0);
+        
+        $('form input#linenumbers').live('change', function() {
+          hexdump($('form select#form-width :selected').html(), $('form select#form-spacing :selected').html(), hasLineNumbers(), hasHTML());
+        });
+        
+        $('form input#html').live('change', function() {
+          hexdump($('form select#form-width :selected').html(), $('form select#form-spacing :selected').html(), hasLineNumbers(), hasHTML());
+        });
+        
+        $('form select#form-width').live('change', function() {
+          hexdump(this.value, $('form select#form-spacing :selected').html(), hasLineNumbers(), hasHTML());
+        });
+        
+        $('form select#form-spacing').live('change', function() {
+          hexdump($('form select#form-width :selected').html(), this.value, hasLineNumbers(), hasHTML());
+        });
+        
+        $("#hexdump").selectable({
+          filter: 'span[data-hex-id]',
+          selected: function(event, ui) {
+           var stringId = ui.selected.attributes[0].value;
+           $('span[data-string-id="'+stringId+'"]').addClass('ui-selected');
+          },
+          unselected: function(event, ui) {
+           var stringId = ui.unselected.attributes[0].value;
+           $('span[data-string-id="'+stringId+'"]').removeClass('ui-selected');
+          }
+        });
+        
+      });
+      
     </script>
 
   </body>
