@@ -1,61 +1,60 @@
 <!DOCTYPE HTML>
 <html lang="en-EN">
-	<head>
-		<meta charset="UTF-8">
-		<title>Hexdump.js</title>
-		<script type="text/javascript" src="../lib/hexdump.js"></script>
-	</head>
 
-	<body>
-		
-		<pre id="hexdump"></pre>
-		
-		<br /><br /><br />
-		
-		<pre id="hexdump2"></pre>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hexdump.js</title>
+    <script type="text/javascript" src="../lib/hexdump.js"></script>
+  </head>
+
+  <body>
+    <pre id="hexdump"></pre>
+
+    <br />
+
+    <pre id="hexdump2"></pre>
 
 
-		<script type="text/javascript">
+    <script type="text/javascript">
 
-		function randomString(length) {
-			var chars = 'A'.split('');
-			
-			if (! length) {
-				length = Math.floor(Math.random() * chars.length);
-			};
+      function randomString(length) {
+        var chars = 'A'.split('');
 
-			var str = '';
-			for (var i = 0; i < length; i++) {
-				str += chars[Math.floor(Math.random() * chars.length)];
-			};
-			return str;
-		};
+        if (! length) {
+          length = Math.floor(Math.random() * chars.length);
+        };
 
-		function update_hex(container, data, spacing, width) {
-			new Hexdump(data, {
-				container: container
-				, width: width,
-				, spacing: spacing,
-				, hexNull: '00',
-				,	stringNull: '.'
-			});
-		};
+        var str = '';
+        for (var i = 0; i < length; i++) {
+          str += chars[Math.floor(Math.random() * chars.length)];
+        };
+        return str;
+      };
 
-		// Ignore This
-		setInterval(function() {
-		  var min = 1; var max = 10; var min2 = 30; var max2 = 40;
-		
-		  var random = Math.floor(Math.random() * (max - min + 1)) + min;
-		  var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
-		  var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-		  var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-		  
-		  var data = randomString(1000);
-		  update_hex('hexdump', data, random, random2);
-		}, 1000);
+      function update_hex(container, data, spacing, width) {
+        new Hexdump(data, {
+          container: container
+          , width: width,
+          , spacing: spacing
+          , hexNull: '00'
+          ,	stringNull: '.'
+        });
+      };
 
-		</script>
+      // Ignore This
+      setInterval(function() {
+        var min = 1; var max = 10; var min2 = 30; var max2 = 40;
 
-	</body>
+        var random = Math.floor(Math.random() * (max - min + 1)) + min;
+        var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
+        var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
+        var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
 
+        var data = randomString(1000);
+        update_hex('hexdump', data, random, random2);
+      }, 1000);
+
+    </script>
+    
+  </body>
 </html>
