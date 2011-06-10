@@ -17,7 +17,7 @@
     <script type="text/javascript">
       
       function randomString(length) {
-          var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz *&!@^#(*&_!$@_)'.split('');
+          var chars = 'A'.split('');
 
           if (! length) {
               length = Math.floor(Math.random() * chars.length);
@@ -31,29 +31,29 @@
       }
       
       function update_hex(container, data, spacing, width) {
-        Hexdump.dump(data, {
+				
+				new Hexdump(data, {
           container: container,
           width: width,
-          spacing: spacing
+          spacing: spacing,
+					hexNull: '00',
+					stringNull: '.'
         });
+
       };
       
-      
-      update_hex('hexdump', randomString(100), 10, 13);
-      update_hex('hexdump2', randomString(100), 25, 33);
-      
-      // setInterval(function() {
-      //   var min = 1; var max = 10;
-      //   var min2 = 30; var max2 = 40;
-      //   var random = Math.floor(Math.random() * (max - min + 1)) + min;
-      //   var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
-      //   
-      //   var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-      //   var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
-      //   
-      //   var data = randomString(1000);
-      //   update_hex('hexdump', data, random, random2);
-      // }, 1000);
+      setInterval(function() {
+        var min = 1; var max = 10;
+        var min2 = 30; var max2 = 40;
+        var random = Math.floor(Math.random() * (max - min + 1)) + min;
+        var random3 = Math.floor(Math.random() * (max - min + 1)) + min;
+        
+        var random2 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
+        var random4 = Math.floor(Math.random() * (max2 - min2 + 1)) + min2;
+        
+        var data = randomString(1000);
+        update_hex('hexdump', data, random, random2);
+      }, 1000);
       
     </script>
     
