@@ -9,6 +9,7 @@ A javascript utility for pretty hexdump output.
 
 ## Examples
 
+    <script type="text/javascript" src="hexdump.js"></script>
     <pre id="hexdump"></pre>
 
     <script type="text/javascript">
