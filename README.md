@@ -19,7 +19,9 @@ A javascript utility for pretty hexdump output.
         , width: 20
         , spacing: 0
         , hexNull: '00'
-        ,  stringNull: '.'
+        , stringNull: '.'
+        , left: '|'
+        , right: '|'
       });
     </script
 

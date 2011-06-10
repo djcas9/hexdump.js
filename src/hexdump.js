@@ -79,7 +79,7 @@ Hexdump = (function() {
   
   Hexdump.prototype.appendString = function(data) {
     var self = this;
-    self.output += " " + self.options.left + data.string + self.options.right;
+    self.output += " " + self.options.left + "" + data.string + "" + self.options.right;
   };
   
   Hexdump.prototype.process = function(data) {
