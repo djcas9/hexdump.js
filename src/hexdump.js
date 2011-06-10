@@ -187,14 +187,14 @@ Hexdump = (function() {
     return { data: hexArray, string: stringArray.join('') };
   };
   
-  function checkForNonPrintable(char) {
-    var c = char.charCodeAt(0).toString(16);
+  function checkForNonPrintable(character) {
+    var c = character.charCodeAt(0).toString(16);
     if (c == 0x9) {
-      return '.';
-    } else if (c == 0x7F){
-      return '.';
+      return '.'
+    } else if (c == 0x7F) {
+      return '.'
     } else {
-      return char;
+      return character;
     };
   };
   
