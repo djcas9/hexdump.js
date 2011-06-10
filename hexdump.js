@@ -8,6 +8,7 @@ var Hexdump;
 
 Hexdump = (function() {
   
+  // Hexdump Initializer
   function Hexdump(data, options) {
     var self = this;
     self.hexdump = [];
@@ -71,8 +72,6 @@ Hexdump = (function() {
       self.appendString(self.hexdump[i]);
       self.output += "\n";
     };
-    
-    //console.log(self.output);
     
     var hexdump_container = document.getElementById(this.options.container);
     hexdump_container.innerHTML = this.output;
