@@ -39,7 +39,7 @@ more information.
               , stringRight: '|'
               , hexLeft: ''
               , hexRight: ''
-              , hexNull: '....'
+              , hexNull: '.'
               , stringNull: '.'
             }
           });
