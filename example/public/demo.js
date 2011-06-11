@@ -19,27 +19,10 @@ $(function() {
     });
   });
 
-  function hexdump (base, width, spacing, linenumbers, html) {
+  function hexdump (options) {
     var data = $('textarea#payload').attr('value');
     
-    new Hexdump(data, {
-      container: 'hexdump'
-      , width: width
-      , spacing: spacing
-      , html: html
-      , lineNumber: linenumbers
-      , base: base
-      , style: {
-          lineNumberLeft: ''
-        , lineNumberRight: ':'
-        , stringLeft: '|'
-        , stringRight: '|'
-        , hexLeft: ''
-        , hexRight: ''
-        , hexNull: '....'
-        , stringNull: '.'
-      }
-    });
+    new Hexdump(data, options);
 
     reselect();
   };
@@ -55,22 +38,33 @@ $(function() {
 
   function hValue() {
     var values = {
-      base: $('form select#form-base :selected').html(),
-      width: $('form select#form-width :selected').html(),
-      spacing: $('form select#form-spacing :selected').html(),
-      numbers: $('form input#linenumbers').is(':checked'),
-      html: $('form input#html').is(':checked')
-    }
+      container: 'hexdump'
+      , width: $('form select#form-width :selected').html()
+      , spacing: $('form select#form-spacing :selected').html()
+      , html: $('form input#html').is(':checked')
+      , lineNumber: $('form input#linenumbers').is(':checked')
+      , base: $('form select#form-base :selected').html()
+      , style: {
+          lineNumberLeft: ''
+        , lineNumberRight: ':'
+        , stringLeft: '|'
+        , stringRight: '|'
+        , hexLeft: ''
+        , hexRight: ''
+        , hexNull: ' '
+        , stringNull: ' '
+      }
+    };
     return values;
   }
   
   $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-spacing').live('change', function() {
-    hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+    hexdump(hValue());
   });
   
   $('textarea#payload').live("keydown", function () {
     if ($('textarea#payload').attr('value').length > 0) {
-      hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+      hexdump(hValue());
     };
   });
   
@@ -95,5 +89,5 @@ $(function() {
     }
   });
   
-  hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+  hexdump(hValue());
 });
