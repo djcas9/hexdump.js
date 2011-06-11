@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'fileutils'
 require 'closure-compiler'
 
 HEADER = /((^\s*\/\/.*\n)+)/
@@ -9,9 +10,11 @@ task :build do
   header  = source.match(HEADER)
   min     = Closure::Compiler.new.compress(source)
   
-  File.open('src/hexdump-min.js', 'w') do |file|
+  hexdump = File.open('src/hexdump-min.js', 'w') do |file|
     file.write header[1].squeeze(' ') + min
   end
+  
+  FileUtils.cp_r('src/hexdump-min.js', 'example/public/hexdump-min.js')
 end
 
 desc "Build the docco documentation"
