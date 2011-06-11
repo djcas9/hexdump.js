@@ -29,7 +29,7 @@ Hexdump = (function() {
         , stringRight: options.style.stringRight || '|'
         , hexLeft: options.style.hexLeft || ''
         , hexRight: options.style.hexRight || ''
-        , hexNull: options.style.hexNull || '00'
+        , hexNull: options.style.hexNull || '....'
         , stringNull: options.style.stringNull || ' '
       }
     };
