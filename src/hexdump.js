@@ -22,6 +22,7 @@ Hexdump = (function() {
       , ascii: options.ascii || false
       , lineNumber: options.lineNumber
       , html: options.html
+      , base: options.base || 'hexadecimal'
       , style: {
           lineNumberLeft: options.style.lineNumberLeft || ''
         , lineNumberRight: options.style.lineNumberRight || ':'
@@ -29,7 +30,7 @@ Hexdump = (function() {
         , stringRight: options.style.stringRight || '|'
         , hexLeft: options.style.hexLeft || ''
         , hexRight: options.style.hexRight || ''
-        , hexNull: options.style.hexNull || '....'
+        , hexNull: options.style.hexNull || '.'
         , stringNull: options.style.stringNull || ' '
       }
     };
@@ -55,6 +56,49 @@ Hexdump = (function() {
     // Make sure width is within proper range.
     if (self.options.width > data.length) {
       self.options.width = data.length;
+    };
+    
+    // Base padding
+    self.padding = {
+      hex: 4,
+      dec: 5,
+      bin: 8
+    };
+    
+    // Base conversion logic
+    switch(self.options.base) {
+      case 'hexadecimal': case 'hex': case 16:
+        self.setNullPadding(self.padding.hex);
+        self.baseConvert = function(characters) {
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0).toString(16), self.padding.hex);
+          };
+        }; break;
+      case 'decimal': case 'dec': case 10:
+        self.setNullPadding(self.padding.dec);
+        self.baseConvert = function(characters) {
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0), self.padding.dec);
+          };
+        }; break;
+      case 'binary': case 'bin': case 2:
+        self.setNullPadding(self.padding.bin);
+        self.baseConvert = function(characters) {
+          for (var i=0; i < characters.length; i++) {
+            var ddx = characters[i].charCodeAt(0), r = "";
+            for (var bbx = 0; bbx < 8; bbx++) { 
+              r = (ddx%2) + r; ddx = Math.floor(ddx/2);
+            };
+            return self.addPadding(r, self.padding.bin);
+          };
+        }; break;
+      default:
+        self.setNullPadding(self.padding.hex);
+        self.baseConvert = function(characters) {
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0).toString(16), self.padding.hex);
+          };
+      };
     };
     
     var regex = new RegExp('.{1,' + this.options.width + '}', 'g');
@@ -145,10 +189,10 @@ Hexdump = (function() {
     
     for (var i=0; i < data.length; i++) {
       if (self.options.html) {
-        hexArray.push('<span data-hex-id="' + self.hexCounter + '">' + toHex(data[i]) + '</span>');
+        hexArray.push('<span data-hex-id="' + self.hexCounter + '">' + self.baseConvert(data[i]) + '</span>');
         stringArray.push('<span data-string-id="' + self.hexCounter + '">' + checkForNonPrintable(data[i]) + '</span>');
       } else {
-        hexArray.push(toHex(data[i]));
+        hexArray.push(self.baseConvert(data[i]));
         stringArray.push(checkForNonPrintable(data[i]));
       };
       self.hexCounter++;
@@ -160,7 +204,7 @@ Hexdump = (function() {
         var nullHex = '';
         
         if (self.options.html) {
-          nullHex = '<span data-null="true">' + self.options.style.hexNull + '</span>';
+          nullHex = '<span data-hex-null="true">' + self.options.style.hexNull + '</span>';
         } else {
           nullHex = self.options.style.hexNull;
         };
@@ -175,7 +219,7 @@ Hexdump = (function() {
         var nullString = '';
         
         if (self.options.html) {
-          nullString = '<span data-null="true">' + self.options.style.stringNull + '</span>';
+          nullString = '<span data-string-null="true">' + self.options.style.stringNull + '</span>';
         } else {
           nullString = self.options.style.stringNull;
         };
@@ -187,6 +231,24 @@ Hexdump = (function() {
     return { data: hexArray, string: stringArray.join('') };
   };
   
+  Hexdump.prototype.setNullPadding = function(padding) {
+    var self = this;
+    
+    var hexNull = self.options.style.hexNull[0]
+    self.options.style.hexNull = "";
+    for (var p=0; p < padding; p++) {
+      self.options.style.hexNull += hexNull;
+    };
+  };
+  
+  Hexdump.prototype.addPadding = function(ch, padding) {
+    var self = this, length = ch.toString().length, pad = '';
+    for (var i=0; i < (padding - length); i++) {
+      pad += '0'
+    };
+    return pad + ch;
+  };
+  
   function checkForNonPrintable(character) {
     var c = character.charCodeAt(0).toString(16);
     if (c == 0x9) {
@@ -195,21 +257,6 @@ Hexdump = (function() {
       return '.'
     } else {
       return character;
-    };
-  };
-  
-  function toHex (characters) {
-    for (var i=0; i < characters.length; i++) {
-      var r = characters.charCodeAt(i).toString(16);
-      if (r.length < 2) { 
-        return "000" + r;
-      } else if (r.length == 4) {
-        return r;
-      } else if (r.length == 3) {
-        return "0" + r;
-      } else { 
-        return "00" + r;
-      };
     };
   };
   

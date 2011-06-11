@@ -2,6 +2,15 @@
   
   <div id='form-row'>
     <div id='box'>
+      <select name='width' id="form-base">
+        <option selected>hexadecimal</option>
+        <option>decimal</option>
+        <option>binary</option>
+      </select>
+      Base Type
+    </div>
+    
+    <div id='box'>
       <select name='width' id="form-width">
         <option>10</option>
         <option selected>16</option>
@@ -48,27 +57,3 @@
 <pre id="hexdump"></pre>
 
 <textarea type='text' id="payload" cols="30" rows="10"></textarea>
-
-<script type="text/javascript">
-  $(function() {
-    var payload = '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃';
-
-    new Hexdump(payload, {
-      container: 'hexdump'
-      , width: 7
-      , spacing: 0
-      , html: false
-      , lineNumber: true
-      , style: {
-          lineNumberLeft: ''
-        , lineNumberRight: ':'
-        , stringLeft: '|'
-        , stringRight: '|'
-        , hexLeft: ''
-        , hexRight: ''
-        , hexNull: '....'
-        , stringNull: '.'
-      }
-    });
-  });
-</script>

@@ -1,13 +1,12 @@
 $(function() {
 
-  var placeholder = 'Welcome To The Hexdump.js Demo!'; 
+  var placeholder = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; 
 
   $('textarea#payload').attr('value', placeholder);
 
   var selectedArray = [];
 
   $('#hexdump span[data-hex-id]').dblclick(function () {
-    console.log('hello')
     $('span').removeClass('ui-selected');      
     var string = $(this).text();
     
@@ -20,7 +19,7 @@ $(function() {
     });
   });
 
-  function hexdump (width, spacing, linenumbers, html) {
+  function hexdump (base, width, spacing, linenumbers, html) {
     var data = $('textarea#payload').attr('value');
     
     new Hexdump(data, {
@@ -29,6 +28,7 @@ $(function() {
       , spacing: spacing
       , html: html
       , lineNumber: linenumbers
+      , base: base
       , style: {
           lineNumberLeft: ''
         , lineNumberRight: ':'
@@ -55,6 +55,7 @@ $(function() {
 
   function hValue() {
     var values = {
+      base: $('form select#form-base :selected').html(),
       width: $('form select#form-width :selected').html(),
       spacing: $('form select#form-spacing :selected').html(),
       numbers: $('form input#linenumbers').is(':checked'),
@@ -63,13 +64,13 @@ $(function() {
     return values;
   }
   
-  $('input#linenumbers, input#html, select#form-width, select#form-spacing').live('change', function() {
-    hexdump(hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+  $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-spacing').live('change', function() {
+    hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
   });
   
   $('textarea#payload').live("keydown", function () {
     if ($('textarea#payload').attr('value').length > 0) {
-      hexdump(hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+      hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
     };
   });
   
@@ -94,5 +95,5 @@ $(function() {
     }
   });
   
-  hexdump(hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+  hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
 });
