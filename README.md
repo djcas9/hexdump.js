@@ -11,7 +11,7 @@ more information.
 
 ## Live Example
 
-  * [http://mephux.github.com/hexdump.js/](http://mephux.github.com/hexdump.js/)
+* [http://mephux.github.com/hexdump.js/](http://mephux.github.com/hexdump.js/)
 
 ## Example
     
