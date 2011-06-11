@@ -4,6 +4,12 @@ textarea{
 	margin-top: 20px;
 }
 
+#hexdump{
+	background-color: #1b1b1b;
+	padding: 20px;
+	color: #fff;
+}
+
 div#form-row{
 	display: block;
 	position: relative;
@@ -23,8 +29,20 @@ div#form-row #box{
 }
 
 #hexdump span{
-	text-decoration: none;
-	font: normal normal normal 0.955em "Courier New", Courier, mono;
+	font: 0.855em "Courier New", Courier, mono;
+}
+
+#hexdump #line-number{
+	color: #1cf629;
+}
+
+#hexdump span[data-string-id]{
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	height: 15px;
+	color: #ebaa2f;
+	width: 14px;
 }
 
 #hexdump span.ui-selecting {
@@ -39,7 +57,12 @@ div#form-row #box{
 	text-shadow: #000 0 1px 0;
 }
 
-#hexdump span[data-null=true]{
+#hexdump span[data-string-null=true]{
+	width: 14px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	height: 15px;
 }
 
 .ui-selectable-helper { position: absolute; z-index: 100; border:1px dotted black; }

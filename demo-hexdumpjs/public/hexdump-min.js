@@ -29,7 +29,7 @@ Hexdump = (function() {
         , stringRight: options.style.stringRight || '|'
         , hexLeft: options.style.hexLeft || ''
         , hexRight: options.style.hexRight || ''
-        , hexNull: options.style.hexNull || '00'
+        , hexNull: options.style.hexNull || '....'
         , stringNull: options.style.stringNull || ' '
       }
     };
@@ -160,7 +160,7 @@ Hexdump = (function() {
         var nullHex = '';
         
         if (self.options.html) {
-          nullHex = '<span data-null="true">' + self.options.style.hexNull + '</span>';
+          nullHex = '<span data-hex-null="true">' + self.options.style.hexNull + '</span>';
         } else {
           nullHex = self.options.style.hexNull;
         };
@@ -175,7 +175,7 @@ Hexdump = (function() {
         var nullString = '';
         
         if (self.options.html) {
-          nullString = '<span data-null="true">' + self.options.style.stringNull + '</span>';
+          nullString = '<span data-string-null="true">' + self.options.style.stringNull + '</span>';
         } else {
           nullString = self.options.style.stringNull;
         };
@@ -189,9 +189,14 @@ Hexdump = (function() {
   
   function checkForNonPrintable(char) {
     var c = char.charCodeAt(0).toString(16);
+    console.log(c)
     if (c == 0x9) {
       return '.';
     } else if (c == 0x7F){
+      return '.';
+    } else if (c == 20){
+      return '.';
+    } else if (c == '200e'){
       return '.';
     } else {
       return char;
