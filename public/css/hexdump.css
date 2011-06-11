@@ -1,0 +1,68 @@
+textarea{
+	width: 600px;	
+	height: 200px;
+	margin-top: 20px;
+}
+
+#hexdump{
+	background-color: #1b1b1b;
+	padding: 20px;
+	color: #fff;
+}
+
+div#form-row{
+	display: block;
+	position: relative;
+	overflow: hidden;
+}
+
+div#form-row #box{
+	vertical-align: middle;
+	display: block;
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 150px;
+	margin-bottom: 10px;
+	height: 30px;
+	line-height: 30px;
+}
+
+#hexdump span{
+	font: 0.855em "Courier New", Courier, mono;
+}
+
+#hexdump #line-number{
+	color: #1cf629;
+}
+
+#hexdump span[data-string-id]{
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	height: 15px;
+	color: #ebaa2f;
+	width: 14px;
+}
+
+#hexdump span.ui-selecting {
+  background: #fcfde0;
+  color: #111;
+  text-shadow: #fff 0 1px 0;
+}
+
+#hexdump span.ui-selected {
+	background: #4eabf7;
+	color: #fff;
+	text-shadow: #000 0 1px 0;
+}
+
+#hexdump span[data-string-null=true]{
+	width: 14px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	height: 15px;
+}
+
+.ui-selectable-helper { position: absolute; z-index: 100; border:1px dotted black; }
