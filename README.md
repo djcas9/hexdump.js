@@ -9,6 +9,10 @@ A javascript utility for fast and simple hexdumping. Hexdump.js is very customiz
 with format options like width and byte grouping. Check out the documentation for
 more information.
 
+## Live Example
+
+  * [http://mephux.github.com/hexdump.js/](http://mephux.github.com/hexdump.js/)
+
 ## Example
     
     <!DOCTYPE HTML>
