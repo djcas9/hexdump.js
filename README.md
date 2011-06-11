@@ -27,6 +27,7 @@ more information.
 
           new Hexdump(payload, {
             container: 'hexdump'
+            , base: 'hex'
             , width: 7
             , spacing: 0
             , html: false
