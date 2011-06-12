@@ -158,7 +158,6 @@ html, body{
 	display: block;
 	position: relative;
 	overflow: hidden;
-	margin-left: -6px;
 	padding-top: 75px;
 	padding-left: 30px;
 	letter-spacing: -1px;
@@ -167,6 +166,7 @@ html, body{
 	text-decoration: none;
 	font: normal normal normal 1.3em "Lucida Grande", Lucida, Verdana, sans-serif;
 	margin-top: -40px;
+	margin-left: -2px;
 }
 
 #wrapper #page #bar-right{
