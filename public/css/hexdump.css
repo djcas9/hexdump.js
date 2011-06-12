@@ -346,12 +346,14 @@ div#form-row #box{
 }
 
 #hexdump span[data-string-id]{
+	vertical-align: middle;
 	position: relative;
 	display: inline-block;
 	overflow: hidden;
 	height: 15px;
 	color: #ebaa2f;
 	width: 14px;
+	text-align: center;
 }
 
 #hexdump span.ui-selecting {
