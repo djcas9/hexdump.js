@@ -146,10 +146,10 @@ html, body{
 }
 
 #wrapper #page{
-	min-height: 2000px;
 	border: 1px solid #383838;
 	overflow: visible;
 	background: #1f1f1f url(../images/page-bg.png) repeat-y;
+	padding-bottom: 20px;
 }
 
 #wrapper #page #bar-left{
@@ -161,14 +161,12 @@ html, body{
 	margin-left: -6px;
 	padding-top: 75px;
 	padding-left: 30px;
-	font-weight: normal;
-	font-style: normal;
-	font-variant: normal;
 	letter-spacing: -1px;
 	text-shadow: #000 0 1px 0;
 	color: #dedede;
 	text-decoration: none;
-	font-size: 1.3em;
+	font: normal normal normal 1.3em "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin-top: -40px;
 }
 
 #wrapper #page #bar-right{
@@ -178,19 +176,49 @@ html, body{
 	position: relative;
 	overflow: hidden;
 	padding-top: 75px;
-	font-weight: normal;
-	font-style: normal;
-	font-variant: normal;
+	font: normal normal normal 1.3em "Lucida Grande", Lucida, Verdana, sans-serif;
 	letter-spacing: -1px;
 	text-shadow: #000 0 1px 0;
 	color: #dedede;
 	text-decoration: none;
-	font-size: 1.3em;
 	margin-right: -6px;
 	text-align: right;
 	padding-right: 30px;
+	margin-top: -40px;
 }
 
+#wrapper #page #box-data{
+	margin-right: 20px;
+	margin-left: 20px;
+	background-color: #000;
+	padding: 20px;
+	margin-top: -50px;
+	border: 1px solid #333;
+	font-size: 0.9em;
+}
+
+#wrapper #page #box-data textarea{
+	background-color: #282828;
+	color: #fff;
+	padding: 10px;
+	display: block;
+	position: relative;
+	margin-top: 20px;
+	margin-left: 0;
+	margin-bottom: 0;
+	width: 854px;
+}
+
+#wrapper #page #box-data pre{
+	margin: 0;
+	padding: 10px;
+	background-color: rgba(27,27,27,0.6);
+	border: 1px solid #3d3d3d;
+	overflow: auto;
+	display: block;
+	position: relative;
+	font-size: 0.855em;
+}
 
 #wrapper #page #banner{
    -moz-border-radius-topright: 5px;
