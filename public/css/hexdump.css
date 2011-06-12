@@ -209,6 +209,7 @@ html, body{
 	margin-bottom: 0;
 	width: 854px;
 	height: 100px;
+	border: 1px solid #3a3a3a;
 }
 
 #wrapper #page #box-data pre{
