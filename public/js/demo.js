@@ -2,7 +2,7 @@ $(function() {
 
   $('#menu-bar').css('opacity', '0.955');
 
-  var placeholder = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; 
+  var placeholder = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃AAAAAAAABBBBBBBBBBBBBB'; 
 
   $('textarea#payload').attr('value', placeholder);
 

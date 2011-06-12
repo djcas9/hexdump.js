@@ -142,7 +142,7 @@ html, body{
 
 #wrapper{
 	width: 960px;
-	margin: 20px auto 100px;
+	margin: 20px auto;
 }
 
 #wrapper #page{
@@ -194,7 +194,8 @@ html, body{
 	padding: 20px;
 	margin-top: -50px;
 	border: 1px solid #333;
-	font-size: 0.9em;
+	font-size: 0.855em;
+	line-height: 1.7em;
 }
 
 #wrapper #page #box-data textarea{
@@ -207,6 +208,7 @@ html, body{
 	margin-left: 0;
 	margin-bottom: 0;
 	width: 854px;
+	height: 100px;
 }
 
 #wrapper #page #box-data pre{
@@ -217,7 +219,8 @@ html, body{
 	overflow: auto;
 	display: block;
 	position: relative;
-	font-size: 0.855em;
+	font-size: 1.0em;
+	line-height: 1.4em;
 }
 
 #wrapper #page #banner{
@@ -289,7 +292,13 @@ a.forkit{
 
 /* @group Footer */
 
-
+#footer{
+	width: 960px;
+	margin: auto auto 50px;
+	color: #7c7c7c;
+	font-size: 0.9em;
+	text-align: left;
+}
 
 /* @end */
 
