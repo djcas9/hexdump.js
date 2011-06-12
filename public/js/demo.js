@@ -1,5 +1,7 @@
 $(function() {
 
+  $('#menu-bar').css('opacity', '0.955');
+
   var placeholder = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'; 
 
   $('textarea#payload').attr('value', placeholder);
