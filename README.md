@@ -14,42 +14,44 @@ more information.
 * [http://mephux.github.com/hexdump.js/](http://mephux.github.com/hexdump.js/)
 
 ## Example
-    
-    <!DOCTYPE HTML>
-    <html lang="en-EN">
-      <head>
-        <meta charset="UTF-8">
-        <title>Hexdump.js</title>
-        <script type="text/javascript" src="hexdump.js"></script>
-      </head>
-      
-      <body>
-        <pre id="hexdump"></pre>
-        
-        <script type="text/javascript">
-          var payload = '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃';
 
-          new Hexdump(payload, {
-            container: 'hexdump'
-            , base: 'hex'
-            , width: 7
-            , spacing: 0
-            , html: false
-            , lineNumber: true
-            , style: {
-                lineNumberLeft: ''
-              , lineNumberRight: ':'
-              , stringLeft: '|'
-              , stringRight: '|'
-              , hexLeft: ''
-              , hexRight: ''
-              , hexNull: '.g'
-              , stringNull: '.'
-            }
-          });
-        </script>
-      </body>
-    </html>
+``` javascript
+<!DOCTYPE HTML>
+<html lang="en-EN">
+  <head>
+    <meta charset="UTF-8">
+    <title>Hexdump.js</title>
+    <script type="text/javascript" src="hexdump.js"></script>
+  </head>
+  
+  <body>
+    <pre id="hexdump"></pre>
+    
+    <script type="text/javascript">
+      var payload = '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃';
+
+      new Hexdump(payload, {
+        container: 'hexdump'
+        , base: 'hex'
+        , width: 7
+        , spacing: 0
+        , html: false
+        , lineNumber: true
+        , style: {
+            lineNumberLeft: ''
+          , lineNumberRight: ':'
+          , stringLeft: '|'
+          , stringRight: '|'
+          , hexLeft: ''
+          , hexRight: ''
+          , hexNull: '.g'
+          , stringNull: '.'
+        }
+      });
+    </script>
+  </body>
+</html>
+```
 
 ## Output
 
