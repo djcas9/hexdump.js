@@ -15,7 +15,7 @@ more information.
 
 ## Example
 
-``` javascript
+``` html
 <!DOCTYPE HTML>
 <html lang="en-EN">
   <head>
