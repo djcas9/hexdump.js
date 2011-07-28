@@ -27,7 +27,7 @@ $(function() {
     new Hexdump(data, {
       container: 'hexdump'
       , width: width
-      , spacing: spacing
+      , byteGrouping: spacing
       , html: html
       , lineNumber: linenumbers
       , base: base
@@ -38,8 +38,9 @@ $(function() {
         , stringRight: '|'
         , hexLeft: ''
         , hexRight: ''
-        , hexNull: '....'
-        , stringNull: '.'
+        , hexNull: '.'
+        , nonPrintable: '.'
+        , stringNull: ' '
       }
     });
 
@@ -59,7 +60,7 @@ $(function() {
     var values = {
       base: $('form select#form-base :selected').html(),
       width: $('form select#form-width :selected').html(),
-      spacing: $('form select#form-spacing :selected').html(),
+      byteGrouping: $('form select#form-spacing :selected').html(),
       numbers: $('form input#linenumbers').is(':checked'),
       html: $('form input#html').is(':checked')
     }
