@@ -10,14 +10,13 @@
     <pre id="hexdump"></pre>
 
     <script type="text/javascript">
-      var payload = '肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶肶';
+      var payload = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
 
       new Hexdump(payload, {
         container: 'hexdump'
         , base: 'hex'
-        , ascii: false
-        , width: 10
-        , byteGrouping: 1
+        , width: 16
+        , spacing: 0
         , html: true
         , lineNumber: true
         , style: {
@@ -27,9 +26,8 @@
           , stringRight: '|'
           , hexLeft: ''
           , hexRight: ''
-          , hexNull: '.'
-          , nonPrintable: '.'
-          , stringNull: ' '
+          , hexNull: '.g'
+          , stringNull: '.'
         }
       });
     </script>
