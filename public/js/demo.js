@@ -68,12 +68,12 @@ $(function() {
   }
   
   $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-spacing').live('change', function() {
-    hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+    hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
   });
   
   $('textarea#payload').live("keydown", function () {
     if ($('textarea#payload').attr('value').length > 0) {
-      hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+      hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
     };
   });
   
@@ -98,5 +98,5 @@ $(function() {
     }
   });
   
-  hexdump(hValue().base, hValue().width, hValue().spacing, hValue().numbers, hValue().html);
+  hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
 });
