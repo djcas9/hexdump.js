@@ -14,7 +14,6 @@ task :build do
     file.write header[1].squeeze(' ') + min
   end
   
-  FileUtils.cp_r('src/hexdump-min.js', 'example/public/hexdump-min.js')
 end
 
 desc "Build the docco documentation"
