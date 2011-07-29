@@ -1,4 +1,4 @@
-// Hexdump.js 0.1.0
+// Hexdump.js 0.1.1
 // (c) 2011 Dustin Willis Webber
 // Hexdump is freely distributable under the MIT license.
 // For all details and documentation:
@@ -373,7 +373,7 @@ Hexdump = (function() {
       return '.'
     } else if (c == 0x7F) {
       return '.'
-    } else if (c.length > 2) {
+    } else if (c.length > 2 && self.options.ascii) {
       return '.'
     } else {
       return character;
