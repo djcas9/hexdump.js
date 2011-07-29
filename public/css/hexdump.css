@@ -377,6 +377,6 @@ div#form-row #box{
 	height: 15px;
 }
 
-.ui-selectable-helper { display:none; position: absolute; z-index: -1; border:1px dotted black; }
+/*.ui-selectable-helper { display:none; position: absolute; z-index: -1; border:1px dotted black; }*/
 
 /* @end */
