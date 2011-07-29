@@ -19,7 +19,7 @@ Hexdump = (function() {
         container: options.container || ''
       , width: options.width || 16
       , byteGrouping: options.byteGrouping || 0
-      , ascii: options.ascii || false
+      , ascii: options.ascii
       , lineNumber: options.lineNumber
       , endian: options.endian || 'big'
       , html: options.html
@@ -50,6 +50,12 @@ Hexdump = (function() {
     if (typeof ln == "undefined" || ln == null) {
       self.options.lineNumber = true;
     };
+
+    var askey = self.options.ascii;
+    if (typeof askey == "undefined" || askey == null) {
+      self.options.ascii = false;
+    };
+
     
     var html = self.options.html;
     if (typeof html == "undefined" || html == null) {
