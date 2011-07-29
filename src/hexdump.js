@@ -14,15 +14,17 @@ Hexdump = (function() {
   function Hexdump(data, options) {
     var self = this;
     self.hexdump = [];
-    
+    self.hex = false;
     self.options = {
         container: options.container || ''
       , width: options.width || 16
-      , spacing: options.spacing || 0
+      , byteGrouping: options.byteGrouping || 0
       , ascii: options.ascii || false
       , lineNumber: options.lineNumber
+      , endian: options.endian || 'big'
       , html: options.html
       , base: options.base || 'hexadecimal'
+      , nonPrintable: options.nonPrintable || '.'
       , style: {
           lineNumberLeft: options.style.lineNumberLeft || ''
         , lineNumberRight: options.style.lineNumberRight || ':'
@@ -34,7 +36,11 @@ Hexdump = (function() {
         , stringNull: options.style.stringNull || ' '
       }
     };
-    
+
+    if (self.options.base == ('hex' || 'hexadecimal')) {
+      self.hex = true;
+    };
+
     // Check for the line number option and turn it off 
     // if not set unless it has been explicitly turned
     // off by the user.
@@ -48,10 +54,15 @@ Hexdump = (function() {
       self.options.html = true;
     };
     
-    // Make sure spacing is within proper range.
-    if (self.options.spacing > data.length) {
-      self.options.spacing = data.length;
+    if (self.endian != ('little' || 'big')) {
+      self.endian = 'big';
     };
+
+    // Make sure spacing is within proper range.
+    if (self.options.byteGrouping > data.length) {
+      self.options.byteGrouping = data.length;
+    };
+    self.options.byteGrouping--;
 
     // Make sure width is within proper range.
     if (self.options.width > data.length) {
@@ -167,7 +178,7 @@ Hexdump = (function() {
       
       for (var x=0; x < self.hexdump[i].data.length; x++) {
         
-        if (spacingCount == self.options.spacing) {
+        if (spacingCount == self.options.byteGrouping) {
           if (x == self.hexdump[i].data.length - 1) {
             self.output += self.hexdump[i].data[x];
           } else {
@@ -205,7 +216,7 @@ Hexdump = (function() {
       for (var cc = 0; cc < code.length; cc++) {
         var tempi = cc + 1;
 
-        if (tempi%2 == 0) {
+        if (tempi % 2 == 0) {
           
           buffer += code[cc].toString();
           split.push(buffer);
@@ -233,8 +244,6 @@ Hexdump = (function() {
       if (self.options.html) {
         
         var code = self.baseConvert(data[i]);
-        
-        console.log(self.options.base);
 
         if (self.options.base == ("hex" || "hexadecimal")) {
           var split = self.splitNulls(code);
@@ -256,19 +265,38 @@ Hexdump = (function() {
 
       } else {
 
-        hexArray.push(self.baseConvert(data[i]));
+        var code = self.baseConvert(data[i]);
+
+        if (self.options.base == ("hex" || "hexadecimal")) {
+          var split = self.splitNulls(code);
+          
+          for (var y = 0; y < split.length; y++) {
+            hexArray.push(split[y]);
+          };
+
+        } else {
+          hexArray.push(code);
+        };
+
         stringArray.push(checkForNonPrintable(data[i]));
 
       };
 
       self.hexCounter++;
-    };
+    }; 
     
-    if (hexArray.length < self.options.width) {
-      var amount = self.options.width - hexArray.length;
+   if (self.hex) {
+      var splitHexWidth = self.options.width * 2;
+    } else {
+      var splitHexWidth = self.options.width;
+    };
+
+    if (hexArray.length < splitHexWidth) {
+      var amount = (splitHexWidth - hexArray.length);
+
       for (var i=0; i < amount; i++) {
         var nullHex = '';
-        
+
         if (self.options.html) {
           nullHex = '<span data-hex-null="true">' + self.options.style.hexNull + '</span>';
         } else {
@@ -283,13 +311,14 @@ Hexdump = (function() {
       var stringAmount = self.options.width - stringArray.length;
       for (var i=0; i < stringAmount; i++) {
         var nullString = '';
-        
+
         if (self.options.html) {
           nullString = '<span data-string-null="true">' + self.options.style.stringNull + '</span>';
         } else {
           nullString = self.options.style.stringNull;
         };
-        
+
+
         stringArray.push(nullString);
       };
     };
@@ -303,6 +332,10 @@ Hexdump = (function() {
     var hexNull = self.options.style.hexNull[0]
     self.options.style.hexNull = "";
 
+    if (self.hex) {
+      padding = padding / 2;
+    };
+
     for (var p=0; p < padding; p++) {
       self.options.style.hexNull += hexNull;
     };
@@ -314,8 +347,12 @@ Hexdump = (function() {
     for (var i=0; i < (padding - length); i++) {
       pad += '0'
     };
-
-    return pad + ch;
+    
+    if (self.options.endian == 'big') {
+      return pad + ch;
+    } else {
+      return ch + pad;
+    };
   };
   
   function checkForNonPrintable(character) {
@@ -334,3 +371,4 @@ Hexdump = (function() {
   
   return Hexdump;
 })();
+
