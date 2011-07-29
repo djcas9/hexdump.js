@@ -37,9 +37,13 @@ Hexdump = (function() {
       }
     };
 
-    if (self.options.base == ('hex' || 'hexadecimal')) {
+    if (self.options.base == 'hex') {
+      self.hex = true;
+    } else if (self.options.base == 'hexadecimal') {
       self.hex = true;
     };
+
+    console.log(self.hex);
 
     // Check for the line number option and turn it off 
     // if not set unless it has been explicitly turned
@@ -110,7 +114,9 @@ Hexdump = (function() {
           };
         }; break;
       default:
-        self.options.base = 'hexadecimal';
+        self.options.base = 'hex';
+        self.hex = true;
+
         self.setNullPadding(self.padding.hex);
         self.baseConvert = function(characters) {
 
@@ -245,7 +251,7 @@ Hexdump = (function() {
         
         var code = self.baseConvert(data[i]);
 
-        if (self.options.base == ("hex" || "hexadecimal")) {
+        if (self.hex) {
           var split = self.splitNulls(code);
           
           for (var y = 0; y < split.length; y++) {
