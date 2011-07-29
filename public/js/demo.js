@@ -23,13 +23,14 @@ $(function() {
     });
   });
 
-  function hexdump (base, width, spacing, linenumbers, html) {
+  function hexdump (base, width, spacing, linenumbers, html, ascii) {
     var data = $('textarea#payload').attr('value');
     
     new Hexdump(data, {
       container: 'hexdump'
       , width: width
       , byteGrouping: spacing
+      , ascii: ascii
       , html: html
       , lineNumber: linenumbers
       , base: base
@@ -64,18 +65,19 @@ $(function() {
       width: $('form select#form-width :selected').html(),
       byteGrouping: $('form select#form-spacing :selected').html(),
       numbers: $('form input#linenumbers').is(':checked'),
-      html: $('form input#html').is(':checked')
+      html: $('form input#html').is(':checked'),
+      ascii: $('form select#form-ascii :selected').html()
     }
     return values;
   }
   
   $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-spacing').live('change', function() {
-    hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
+    hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html, hValue().ascii);
   });
   
   $('textarea#payload').live("keydown", function () {
     if ($('textarea#payload').attr('value').length > 0) {
-      hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
+      hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html, hValue().ascii);
     };
   });
   
@@ -101,5 +103,5 @@ $(function() {
     }
   });
   
-  hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html);
+  hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html, hValue().ascii);
 });
