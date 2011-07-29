@@ -3,14 +3,373 @@
 // Hexdump is freely distributable under the MIT license.
 // For all details and documentation:
 // http://github.com/mephux/hexdump.js
+
 var Hexdump;
-Hexdump=function(){function f(c,b){var a=this;a.hexdump=[];a.hex=!1;a.options={container:b.container||"",width:b.width||16,byteGrouping:b.byteGrouping||1,ascii:b.ascii||!1,lineNumber:b.lineNumber,endian:b.endian||"big",html:b.html,base:b.base||"hexadecimal",nonPrintable:b.nonPrintable||".",style:{lineNumberLeft:b.style.lineNumberLeft||"",lineNumberRight:b.style.lineNumberRight||":",stringLeft:b.style.stringLeft||"|",stringRight:b.style.stringRight||"|",hexLeft:b.style.hexLeft||"",hexRight:b.style.hexRight||"",
-hexNull:b.style.hexNull||".",stringNull:b.style.stringNull||" "}};if(a.options.base=="hex")a.hex=!0;var d=a.options.lineNumber;if(typeof d=="undefined"||d==null)a.options.lineNumber=!0;d=a.options.html;if(typeof d=="undefined"||d==null)a.options.html=!0;if(a.endian!="little")a.endian="big";if(a.options.byteGrouping>c.length)a.options.byteGrouping=c.length;a.options.byteGrouping--;if(a.options.width>c.length)a.options.width=c.length;a.padding={hex:4,dec:5,bin:8};switch(a.options.base){case "hexadecimal":case "hex":case 16:a.setNullPadding(a.padding.hex);
-a.baseConvert=function(b){for(;0<b.length;)return a.addPadding(b[0].charCodeAt(0).toString(16),a.padding.hex)};break;case "decimal":case "dec":case 10:a.setNullPadding(a.padding.dec);a.baseConvert=function(b){for(;0<b.length;)return a.addPadding(b[0].charCodeAt(0),a.padding.dec)};break;case "binary":case "bin":case 2:a.setNullPadding(a.padding.bin);a.baseConvert=function(b){for(;0<b.length;){b=b[0].charCodeAt(0);for(var c="",d=0;d<8;d++)c=b%2+c,b=Math.floor(b/2);return a.addPadding(c,a.padding.bin)}};
-break;default:a.options.base="hexadecimal",a.setNullPadding(a.padding.hex),a.baseConvert=function(b){for(;0<b.length;)return a.addPadding(b[0].charCodeAt(0).toString(16),a.padding.hex)}}a.data=c.match(RegExp(".{1,"+this.options.width+"}","g"));a.nullCount=a.options.width-a.data[a.data.length-1].length;a.hexCounter=0;for(d=a.stringCounter=0;d<a.data.length;d++){var e=a.process(a.data[d]);a.hexdump.push({data:e.data,string:e.string,length:a.data[d].length,missing:a.options.width-a.data[d].length})}a.dump()}
-function g(c){var b=c.charCodeAt(0).toString(16);return b==9?".":b==127?".":c}f.prototype.dump=function(){this.output="";for(var c=0;c<this.hexdump.length;c++){if(this.options.lineNumber){var b="";b+=this.options.style.lineNumberLeft;for(var a=c*this.options.width,d=8-a.toString().length,e=0;e<d;e++)b+="0";b+=a;b+=this.options.style.lineNumberRight+" ";this.output+=this.options.html?'<span id="line-number">'+b+"</span>":b}b=0;this.output+=this.options.style.hexLeft;for(a=0;a<this.hexdump[c].data.length;a++)b==
-this.options.byteGrouping?(this.output+=a==this.hexdump[c].data.length-1?this.hexdump[c].data[a]:this.hexdump[c].data[a]+" ",b=0):(this.output+=this.hexdump[c].data[a],b++);this.output+=this.options.style.hexRight;this.appendString(this.hexdump[c]);this.output+="\n"}document.getElementById(this.options.container).innerHTML=this.output};f.prototype.appendString=function(c){this.output+=" "+this.options.style.stringLeft;this.output+=c.string;this.output+=this.options.style.stringRight};f.prototype.splitNulls=
-function(c){var b=[],a="";if(c&&c.length>2)for(var d=0;d<c.length;d++)(d+1)%2==0?(a+=c[d].toString(),b.push(a),a=""):a+=c[d].toString();return b};f.prototype.process=function(c){for(var b=[],a=[],d=0;d<c.length;d++){if(this.options.html){var e=this.baseConvert(c[d]);if(this.options.base=="hex"){e=this.splitNulls(e);for(var f=0;f<e.length;f++)a.push('<span data-hex-id="'+this.hexCounter+'">'+e[f]+"</span>")}else a.push('<span data-hex-id="'+this.hexCounter+'">'+e+"</span>");b.push('<span data-string-id="'+
-this.hexCounter+'">'+g(c[d])+"</span>")}else{e=this.baseConvert(c[d]);if(this.options.base=="hex"){e=this.splitNulls(e);for(f=0;f<e.length;f++)a.push(e[f])}else a.push(e);b.push(g(c[d]))}this.hexCounter++}d=this.hex?this.options.width*2:this.options.width;if(a.length<d){c=d-a.length;for(d=0;d<c;d++)e="",e=this.options.html?'<span data-hex-null="true">'+this.options.style.hexNull+"</span>":this.options.style.hexNull,a.push(e)}if(b.length<this.options.width){c=this.options.width-b.length;for(d=0;d<
-c;d++)e="",e=this.options.html?'<span data-string-null="true">'+this.options.style.stringNull+"</span>":this.options.style.stringNull,b.push(e)}return{data:a,string:b.join("")}};f.prototype.setNullPadding=function(c){var b=this.options.style.hexNull[0];this.options.style.hexNull="";this.hex&&(c/=2);for(var a=0;a<c;a++)this.options.style.hexNull+=b};f.prototype.addPadding=function(c,b){for(var a=c.toString().length,d="",e=0;e<b-a;e++)d+="0";return this.options.endian=="big"?d+c:c+d};return f}();
+
+Hexdump = (function() {
+  
+  // Hexdump Initializer
+  // data => The string payload.
+  // options => hexdump configurations
+  function Hexdump(data, options) {
+    var self = this;
+    self.hexdump = [];
+    self.hex = false;
+    self.options = {
+        container: options.container || ''
+      , width: options.width || 16
+      , byteGrouping: options.byteGrouping || 0
+      , ascii: options.ascii || false
+      , lineNumber: options.lineNumber
+      , endian: options.endian || 'big'
+      , html: options.html
+      , base: options.base || 'hexadecimal'
+      , nonPrintable: options.nonPrintable || '.'
+      , style: {
+          lineNumberLeft: options.style.lineNumberLeft || ''
+        , lineNumberRight: options.style.lineNumberRight || ':'
+        , stringLeft: options.style.stringLeft || '|'
+        , stringRight: options.style.stringRight || '|'
+        , hexLeft: options.style.hexLeft || ''
+        , hexRight: options.style.hexRight || ''
+        , hexNull: options.style.hexNull || '.'
+        , stringNull: options.style.stringNull || ' '
+      }
+    };
+
+    if (self.options.base == ('hex' || 'hexadecimal')) {
+      self.hex = true;
+    };
+
+    // Check for the line number option and turn it off 
+    // if not set unless it has been explicitly turned
+    // off by the user.
+    var ln = self.options.lineNumber;
+    if (typeof ln == "undefined" || ln == null) {
+      self.options.lineNumber = true;
+    };
+    
+    var html = self.options.html;
+    if (typeof html == "undefined" || html == null) {
+      self.options.html = true;
+    };
+    
+    if (self.endian != ('little' || 'big')) {
+      self.endian = 'big';
+    };
+
+    // Make sure spacing is within proper range.
+    if (self.options.byteGrouping > data.length) {
+      self.options.byteGrouping = data.length;
+    };
+    self.options.byteGrouping--;
+
+    // Make sure width is within proper range.
+    if (self.options.width > data.length) {
+      self.options.width = data.length;
+    };
+    
+    // Base padding
+    self.padding = {
+      hex: 4,
+      dec: 5,
+      bin: 8
+    };
+    
+    // Base conversion logic
+    switch(self.options.base) {
+      case 'hexadecimal': case 'hex': case 16:
+        self.setNullPadding(self.padding.hex);
+        self.baseConvert = function(characters) {
+          
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0).toString(16), self.padding.hex);
+          };
+
+        }; break;
+      case 'decimal': case 'dec': case 10:
+        self.setNullPadding(self.padding.dec);
+        self.baseConvert = function(characters) {
+          
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0), self.padding.dec);
+          };
+
+        }; break;
+      case 'binary': case 'bin': case 2:
+        self.setNullPadding(self.padding.bin);
+        self.baseConvert = function(characters) {
+          for (var i=0; i < characters.length; i++) {
+            var ddx = characters[i].charCodeAt(0), r = "";
+            
+            for (var bbx = 0; bbx < 8; bbx++) { 
+              r = (ddx%2) + r; ddx = Math.floor(ddx/2);
+            };
+
+            return self.addPadding(r, self.padding.bin);
+          };
+        }; break;
+      default:
+        self.options.base = 'hexadecimal';
+        self.setNullPadding(self.padding.hex);
+        self.baseConvert = function(characters) {
+
+          for (var i=0; i < characters.length; i++) {
+            return self.addPadding(characters[i].charCodeAt(0).toString(16), self.padding.hex);
+          };
+
+      };
+    };
+    
+    var regex = new RegExp('.{1,' + this.options.width + '}', 'g');
+
+    self.data = data.match(regex);
+    
+    self.nullCount = (self.options.width - self.data[self.data.length - 1].length);
+    
+    self.hexCounter = 0;
+    
+    self.stringCounter = 0;
+    
+    for (var i=0; i < self.data.length; i++) {
+      var tempData = self.process(self.data[i]);
+      
+      self.hexdump.push({
+        data: tempData.data,
+        string: tempData.string,
+        length: self.data[i].length,
+        missing: (self.options.width - self.data[i].length)
+      });
+    };
+    
+    self.dump();
+  }
+  
+  Hexdump.prototype.dump = function() {
+    var self = this;
+    
+    self.output = '';
+    for (var i=0; i < self.hexdump.length; i++) {
+      
+      if (self.options.lineNumber) { 
+        var tempLineNumberStyle = '';
+        tempLineNumberStyle += self.options.style.lineNumberLeft;
+        
+        var currentLineCount = (i * self.options.width); //.toString(16);
+        var temLineCount = 8 - currentLineCount.toString().length;
+        for (var l=0; l < temLineCount; l++) {
+          tempLineNumberStyle += '0';
+        };
+        
+        tempLineNumberStyle += currentLineCount;
+        tempLineNumberStyle += self.options.style.lineNumberRight + ' ';
+        
+        if (self.options.html) {
+          self.output += '<span id="line-number">'+tempLineNumberStyle+'</span>';
+        } else {
+          self.output += tempLineNumberStyle;
+        };
+      };
+      
+      var spacingCount = 0;
+      var breakPoint = Math.floor(self.options.width / 2);
+      
+      self.output += self.options.style.hexLeft;
+      
+      for (var x=0; x < self.hexdump[i].data.length; x++) {
+        
+        if (spacingCount == self.options.byteGrouping) {
+          if (x == self.hexdump[i].data.length - 1) {
+            self.output += self.hexdump[i].data[x];
+          } else {
+            self.output += self.hexdump[i].data[x] + ' ';
+          };
+          spacingCount = 0;
+        } else {
+          self.output += self.hexdump[i].data[x];
+          spacingCount++;
+        };
+      };
+
+      self.output += self.options.style.hexRight;
+      
+      self.appendString(self.hexdump[i]);
+      self.output += "\n";
+    };
+    
+    var hexdump_container = document.getElementById(this.options.container);
+    hexdump_container.innerHTML = this.output;
+  };
+  
+  Hexdump.prototype.appendString = function(data) {
+    var self = this;
+    self.output += ' ' + self.options.style.stringLeft;
+    self.output += data.string;
+    self.output += self.options.style.stringRight;
+  };
+  
+  Hexdump.prototype.splitNulls = function(code) {
+    var split = [];
+    var buffer = "";
+    
+    if (code && code.length > 2) {
+      for (var cc = 0; cc < code.length; cc++) {
+        var tempi = cc + 1;
+
+        if (tempi % 2 == 0) {
+          
+          buffer += code[cc].toString();
+          split.push(buffer);
+
+          buffer = "";
+
+        } else {
+
+          buffer += code[cc].toString();
+
+        };
+
+      };
+    };
+    
+    return split;
+  };
+
+  Hexdump.prototype.process = function(data) {
+    var self = this;
+    var stringArray = [];
+    var hexArray = [];
+    
+    for (var i=0; i < data.length; i++) {
+      if (self.options.html) {
+        
+        var code = self.baseConvert(data[i]);
+
+        if (self.options.base == ("hex" || "hexadecimal")) {
+          var split = self.splitNulls(code);
+          
+          for (var y = 0; y < split.length; y++) {
+            hexArray.push('<span data-hex-id="' + self.hexCounter + '">' + 
+            split[y] + '</span>');
+          };
+
+        } else {
+
+          hexArray.push('<span data-hex-id="' + self.hexCounter + '">' + 
+          code + '</span>');
+
+        };
+        
+        stringArray.push('<span data-string-id="' + self.hexCounter + '">' + 
+                         checkForNonPrintable(data[i]) + '</span>');
+
+      } else {
+
+        var code = self.baseConvert(data[i]);
+
+        if (self.options.base == ("hex" || "hexadecimal")) {
+          var split = self.splitNulls(code);
+          
+          for (var y = 0; y < split.length; y++) {
+            hexArray.push(split[y]);
+          };
+
+        } else {
+          hexArray.push(code);
+        };
+
+        stringArray.push(checkForNonPrintable(data[i]));
+
+      };
+
+      self.hexCounter++;
+    }; 
+    
+   if (self.hex) {
+      var splitHexWidth = self.options.width * 2;
+    } else {
+      var splitHexWidth = self.options.width;
+    };
+
+    if (hexArray.length < splitHexWidth) {
+      var amount = (splitHexWidth - hexArray.length);
+
+      for (var i=0; i < amount; i++) {
+        var nullHex = '';
+
+        if (self.options.html) {
+          nullHex = '<span data-hex-null="true">' + self.options.style.hexNull + '</span>';
+        } else {
+          nullHex = self.options.style.hexNull;
+        };
+        
+        hexArray.push(nullHex);
+      };
+    };
+    
+    if (stringArray.length < self.options.width) {
+      var stringAmount = self.options.width - stringArray.length;
+      for (var i=0; i < stringAmount; i++) {
+        var nullString = '';
+
+        if (self.options.html) {
+          nullString = '<span data-string-null="true">' + self.options.style.stringNull + '</span>';
+        } else {
+          nullString = self.options.style.stringNull;
+        };
+
+
+        stringArray.push(nullString);
+      };
+    };
+    
+    return { data: hexArray, string: stringArray.join('') };
+  };
+  
+  Hexdump.prototype.setNullPadding = function(padding) {
+    var self = this;
+    
+    var hexNull = self.options.style.hexNull[0]
+    self.options.style.hexNull = "";
+
+    if (self.hex) {
+      padding = padding / 2;
+    };
+
+    for (var p=0; p < padding; p++) {
+      self.options.style.hexNull += hexNull;
+    };
+  };
+  
+  Hexdump.prototype.addPadding = function(ch, padding) {
+    var self = this, length = ch.toString().length, pad = '';
+
+    for (var i=0; i < (padding - length); i++) {
+      pad += '0'
+    };
+    
+    if (self.options.endian == 'big') {
+      return pad + ch;
+    } else {
+      return ch + pad;
+    };
+  };
+  
+  function checkForNonPrintable(character) {
+
+    var c = character.charCodeAt(0).toString(16);
+    
+    if (c == 0x9) {
+      return '.'
+    } else if (c == 0x7F) {
+      return '.'
+    } else {
+      return character;
+    };
+
+  };
+  
+  return Hexdump;
+})();
+
 
