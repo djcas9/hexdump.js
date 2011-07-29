@@ -10,12 +10,16 @@
     <pre id="hexdump"></pre>
 
     <script type="text/javascript">
-      var payload = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA';
+      var placeholder = '䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' + 
+        '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
+        '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃A';
+      
 
-      new Hexdump(payload, {
+      new Hexdump(placeholder, {
         container: 'hexdump'
         , base: 'hexadecimal'
         , width: 16
+        , ascii: true
         , byteGrouping: 1
         , html: true
         , lineNumber: true

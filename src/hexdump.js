@@ -43,8 +43,6 @@ Hexdump = (function() {
       self.hex = true;
     };
 
-    console.log(self.hex);
-
     // Check for the line number option and turn it off 
     // if not set unless it has been explicitly turned
     // off by the user.
@@ -267,7 +265,7 @@ Hexdump = (function() {
         };
         
         stringArray.push('<span data-string-id="' + self.hexCounter + '">' + 
-                         checkForNonPrintable(data[i]) + '</span>');
+                         self.checkForNonPrintable(data[i]) + '</span>');
 
       } else {
 
@@ -284,7 +282,7 @@ Hexdump = (function() {
           hexArray.push(code);
         };
 
-        stringArray.push(checkForNonPrintable(data[i]));
+        stringArray.push(self.checkForNonPrintable(data[i]));
 
       };
 
@@ -353,7 +351,7 @@ Hexdump = (function() {
     for (var i=0; i < (padding - length); i++) {
       pad += '0'
     };
-    
+   
     if (self.options.endian == 'big') {
       return pad + ch;
     } else {
@@ -361,13 +359,15 @@ Hexdump = (function() {
     };
   };
   
-  function checkForNonPrintable(character) {
-
+  Hexdump.prototype.checkForNonPrintable = function(character) {
+    var self = this; 
     var c = character.charCodeAt(0).toString(16);
     
     if (c == 0x9) {
       return '.'
     } else if (c == 0x7F) {
+      return '.'
+    } else if (c.length > 2) {
       return '.'
     } else {
       return character;
