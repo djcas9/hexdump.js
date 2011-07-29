@@ -25,8 +25,7 @@ $(function() {
 
   function hexdump (base, width, spacing, linenumbers, html, ascii) {
     var data = $('textarea#payload').attr('value');
-    
-    new Hexdump(data, {
+    var options = {
       container: 'hexdump'
       , width: width
       , byteGrouping: spacing
@@ -45,7 +44,12 @@ $(function() {
         , nonPrintable: '.'
         , stringNull: ' '
       }
-    });
+    };
+
+    
+    console.log(options)
+
+    new Hexdump(data, options);
 
     reselect();
   };
