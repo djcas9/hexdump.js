@@ -332,10 +332,10 @@ div#form-row #box{
 	position: relative;
 	overflow: hidden;
 	float: left;
-	width: 150px;
 	margin-bottom: 10px;
 	height: 30px;
 	line-height: 30px;
+	margin-right: 10px;
 }
 
 #hexdump span{
