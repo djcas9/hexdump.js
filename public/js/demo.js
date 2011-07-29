@@ -80,6 +80,7 @@ $(function() {
   });
   
   $("#hexdump").selectable({
+    autoRefresh: true,
     filter: 'span[data-hex-id]',
     selected: function(event, ui) {
      $('#hexdump span.ui-selecting').removeClass('ui-selecting').addClass('ui-selected');
