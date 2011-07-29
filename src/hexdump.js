@@ -273,7 +273,7 @@ Hexdump = (function() {
 
         var code = self.baseConvert(data[i]);
 
-        if (self.options.base == ("hex" || "hexadecimal")) {
+        if (self.hex) {
           var split = self.splitNulls(code);
           
           for (var y = 0; y < split.length; y++) {
