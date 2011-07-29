@@ -46,10 +46,7 @@
         
         <div id="box-data">
           <div id="example">
-            
-            <pre id="hexdump"></pre>
-
-<form action="#">
+            <form action="#">
 
               <div id='form-row'>
                 <div id='box'>
@@ -75,14 +72,6 @@
                   Width
                 </div>
 
-                <div id='box'>
-                  <select name='width' id="form-ascii">
-                    <option>true</option>
-                    <option selected>false</option>
-                  </select>
-                  ASCII Only
-                </div>
-
                 <div id="box">
                   <select name='width' id="form-spacing">
                     <option>0</option>
@@ -101,6 +90,11 @@
                 </div>
 
                 <div id='box'>
+                  <input type="checkbox" name="ascii" id="ascii" checked='false' />
+                  ASCII only
+                </div>
+
+                <div id='box'>
                   <input type="checkbox" name="linenumbers" id="linenumbers" checked='true' />
                   Line Numbers
                 </div>
@@ -113,6 +107,8 @@
               </div>
             </form>
 
+            <pre id="hexdump"></pre>
+            
             <br />
             
             ** Try selecting some hex with your mouse!

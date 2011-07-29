@@ -66,12 +66,12 @@ $(function() {
       byteGrouping: $('form select#form-spacing :selected').html(),
       numbers: $('form input#linenumbers').is(':checked'),
       html: $('form input#html').is(':checked'),
-      ascii: $('form select#form-ascii :selected').html()
+      ascii: $('form input#ascii').is(':checked')
     }
     return values;
   }
   
-  $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-ascii, select#form-spacing').live('change', function() {
+  $('input#linenumbers, input#html, select#form-width, select#form-base, input#ascii, select#form-spacing').live('change', function() {
     hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html, hValue().ascii);
   });
   
