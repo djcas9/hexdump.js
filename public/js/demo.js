@@ -71,7 +71,7 @@ $(function() {
     return values;
   }
   
-  $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-spacing').live('change', function() {
+  $('input#linenumbers, input#html, select#form-width, select#form-base, select#form-ascii, select#form-spacing').live('change', function() {
     hexdump(hValue().base, hValue().width, hValue().byteGrouping, hValue().numbers, hValue().html, hValue().ascii);
   });
   
