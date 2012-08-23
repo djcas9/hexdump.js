@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/mephux/hexdump.js.png)](http://travis-ci.org/mephux/hexdump.js)
 # Hexdump.js
 
 * [Homepage](https://github.com/mephux/hexdump.js)
