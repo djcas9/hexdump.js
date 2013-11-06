@@ -34,7 +34,7 @@ more information.
         container: 'hexdump'
         , base: 'hex'
         , width: 7
-        , ascii: false,
+        , ascii: false
         , byteGrouping: 0
         , html: false
         , lineNumber: true
