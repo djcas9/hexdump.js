@@ -7,6 +7,6 @@
   "contributors"  : [],
   "dependencies"  : [],
   "repository"    : {"type": "git", "url": "git://github.com/mephux/hexdump.js.git"},
-  "main"          : "hexdump.js",
-  "version"       : "0.1.1"
+  "main"          : "src/hexdump.js",
+  "version"       : "0.1.2"
 }
