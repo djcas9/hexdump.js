@@ -4,7 +4,7 @@ require 'closure-compiler'
 
 HEADER = /((^\s*\/\/.*\n)+)/
 
-desc "Use the Closure Compiler to compress Underscore.js"
+desc "Use the Closure Compiler to compress hexdump.js"
 task :build do
   source  = File.read('src/hexdump.js')
   header  = source.match(HEADER)
@@ -14,9 +14,4 @@ task :build do
     file.write header[1].squeeze(' ') + min
   end
   
-end
-
-desc "Build the docco documentation"
-task :doc do
-  sh "docco lib/hexdump.js"
 end
