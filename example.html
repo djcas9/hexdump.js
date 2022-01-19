@@ -1,7 +1,8 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en-EN">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hexdump.js</title>
     <script type="text/javascript" src="src/hexdump.js"></script>
   </head>
@@ -10,29 +11,29 @@
     <pre id="hexdump"></pre>
 
     <script type="text/javascript">
-      var placeholder = '䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' + 
-        '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA' +
-        '䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃A';
-      
+      var placeholder =
+        "䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+        "䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+        "䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䉁䅃䉁䅃䍂䉁䅃䍂䍂䉁䅃䍂䉁䅃A";
 
       new Hexdump(placeholder, {
-        container: 'hexdump'
-        , base: 'hexadecimal'
-        , width: 16
-        , ascii: true
-        , byteGrouping: 1
-        , html: true
-        , lineNumber: true
-        , style: {
-            lineNumberLeft: ''
-          , lineNumberRight: ':'
-          , stringLeft: '|'
-          , stringRight: '|'
-          , hexLeft: ''
-          , hexRight: ''
-          , hexNull: '.g'
-          , stringNull: '.'
-        }
+        container: "hexdump",
+        base: "hexadecimal",
+        width: 16,
+        ascii: true,
+        byteGrouping: 1,
+        html: true,
+        lineNumber: true,
+        style: {
+          lineNumberLeft: "",
+          lineNumberRight: ":",
+          stringLeft: "|",
+          stringRight: "|",
+          hexLeft: "",
+          hexRight: "",
+          hexNull: ".g",
+          stringNull: ".",
+        },
       });
     </script>
   </body>
